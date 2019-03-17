@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Web Components - My Counter</title>
+  <script src="https://unpkg.com/@webcomponents/html-imports/html-imports.min.js"></script>
+  <link rel="import" href="./my-counter.html">
+</head>
+
+<body>
+<my-counter id="cnt" value="42"></my-counter>
+<my-counter></my-counter>
+<script>
+    let cnt = document.getElementById("cnt");
+    cnt.addEventListener('action', e => console.log("action: " + e.detail));
+    cnt.addEventListener('change', e => console.log("change " + e.detail));
+</script>
+</body>
+
+</html>
