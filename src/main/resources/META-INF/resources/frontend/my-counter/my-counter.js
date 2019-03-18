@@ -40,16 +40,6 @@ export class MyCounter extends HTMLElement {
             .addEventListener('click', e => this.decreaseCounter(e));
     }
 
-    connectedCallback() {
-        if (!this.hasAttribute("value")) {
-            this.value = 0;
-        }
-    }
-
-    static get observedAttributes() {
-        return ['value'];
-    }
-
     increaseCounter() {
         this.value++;
         this.dispatchEvent(new CustomEvent("action", {
@@ -62,6 +52,16 @@ export class MyCounter extends HTMLElement {
         this.dispatchEvent(new CustomEvent("action", {
             detail: "decrease"
         }));
+    }
+
+    connectedCallback() {
+        if (!this.hasAttribute("value")) {
+            this.value = 0;
+        }
+    }
+
+    static get observedAttributes() {
+        return ['value'];
     }
 
     get value() {
@@ -78,7 +78,7 @@ export class MyCounter extends HTMLElement {
         this._value = n;
         this.valueElement.innerText = n;
         this.setAttribute("value", n);
-        this.dispatchEvent(new CustomEvent("change", {detail: n}));
+        this.dispatchEvent(new CustomEvent("count", {detail: n}));
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
