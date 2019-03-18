@@ -24,6 +24,7 @@ template.innerHTML = `
 export class MyCounter extends HTMLElement {
     constructor() {
         super();
+
         this.rootElement = this.attachShadow({mode: 'open'});
         this.rootElement.appendChild(template.content.cloneNode(true));
 
@@ -37,14 +38,13 @@ export class MyCounter extends HTMLElement {
 
         this.minusButton
             .addEventListener('click', e => this.decreaseCounter(e));
+    }
 
+    connectedCallback() {
         if (!this.hasAttribute("value")) {
             this.value = 0;
         }
     }
-
-    // connectedCallback() {
-    // }
 
     static get observedAttributes() {
         return ['value'];
@@ -52,16 +52,16 @@ export class MyCounter extends HTMLElement {
 
     increaseCounter() {
         this.value++;
-//        this.dispatchEvent(new CustomEvent("action", {
-//            detail: "increase"
-//        }));
+        this.dispatchEvent(new CustomEvent("action", {
+            detail: "increase"
+        }));
     }
 
     decreaseCounter() {
         this.value--;
-//        this.dispatchEvent(new CustomEvent("action", {
-//            detail: "decrease"
-//        }));
+        this.dispatchEvent(new CustomEvent("action", {
+            detail: "decrease"
+        }));
     }
 
     get value() {
@@ -70,11 +70,11 @@ export class MyCounter extends HTMLElement {
     }
 
     set value(v) {
-        console.log("set value: " + v);
         let n = parseInt(v, 10);
         if (n === this._value) {
             return;
         }
+        console.log("set value: " + v);
         this._value = n;
         this.valueElement.innerText = n;
         this.setAttribute("value", n);

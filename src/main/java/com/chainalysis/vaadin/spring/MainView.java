@@ -16,6 +16,7 @@ public class MainView extends VerticalLayout {
         Button button = new Button("Click me",
                 e -> Notification.show(bean.getMessage()));
         add(button);
+        add(new MyCounter());
     }
 
 }
