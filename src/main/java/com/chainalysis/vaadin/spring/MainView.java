@@ -2,12 +2,13 @@ package com.chainalysis.vaadin.spring;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import static java.lang.Integer.parseInt;
 
 @Route
 @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
@@ -17,23 +18,27 @@ public class MainView extends VerticalLayout {
         MyCounter counter = new MyCounter();
         add(counter);
 
-        HorizontalLayout hbox = new HorizontalLayout();
+        add(new HorizontalLayout(
+                new Button("setValue(87)",
+                        e1 -> counter.setValue("87")
+                ),
+                new Button("increaseCounter",
+                        e1 -> counter.increaseCounter()
+                ),
+                new Button("decreaseCounter()",
+                        e1 -> counter.decreaseCounter()
+                ),
+                new Button("setValue(getValue()+1)",
+                        e1 -> counter.setValue(""+ (parseInt(counter.getValue()) + 1))
+                ),
+                new Button("setValue(getValue()-1)",
+                        e1 -> counter.setValue(""+(parseInt(counter.getValue()) - 1))
+                )
+        ));
 
-        hbox.add(new Button("Decrease",
-                e1 -> counter.decreaseCounter()
-        ));
-        hbox.add(new Button("Reset to 87",
-                e1 -> counter.setValue("87")
-        ));
-        hbox.add(new Button("Increase",
-                e1 -> counter.increaseCounter()
-        ));
-        add(hbox);
-
-        Label label = new Label(counter.getValue());
-        counter.addChangeListener(e -> label.setText("The counter is now "+counter.getValue()));
+        Label label = new Label("The counter is now ?");
+        counter.addChangeListener(e -> label.setText("The counter is now " + counter.getValue()));
         add(label);
 
     }
-
 }
