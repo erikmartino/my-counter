@@ -8,7 +8,7 @@ import com.vaadin.flow.shared.Registration;
 @HtmlImport("frontend://my-counter/my-counter.html")
 public class MyCounter extends Component {
     private static PropertyDescriptor<Integer, Integer> VALUE =
-            PropertyDescriptors.propertyWithDefault("value", Integer.MAX_VALUE);
+            PropertyDescriptors.propertyWithDefault("value", 0);
 
     // binding attributes bidirectional
     @Synchronize(value = "count")

@@ -55,9 +55,7 @@ export class MyCounter extends HTMLElement {
     }
 
     connectedCallback() {
-        if (!this.hasAttribute("value")) {
-            this.value = 0;
-        }
+        this.value = this.value;
     }
 
     static get observedAttributes() {
@@ -71,7 +69,9 @@ export class MyCounter extends HTMLElement {
 
     set value(v) {
         let n = parseInt(v, 10);
-        if (n === this._value) {
+        if (isNaN(n)) {
+            n = 0;
+        } else if (n === this._value) {
             return;
         }
         console.log("set value: " + v);

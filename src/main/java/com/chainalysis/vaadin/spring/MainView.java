@@ -6,9 +6,6 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import static java.lang.Integer.parseInt;
 
 @Route
 @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
@@ -36,9 +33,14 @@ public class MainView extends VerticalLayout {
                 )
         ));
 
-        Label label = new Label("The counter is now ?");
-        counter.addChangeListener(e -> label.setText("The counter is now " + counter.getValue()));
+        Label label = new Label();
+        updateLabelText(counter, label);
+        counter.addChangeListener(e -> updateLabelText(counter, label));
         add(label);
 
+    }
+
+    private void updateLabelText(MyCounter counter, Label label) {
+        label.setText("The counter is now " + counter.getValue());
     }
 }
