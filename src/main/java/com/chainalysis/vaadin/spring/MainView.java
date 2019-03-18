@@ -14,25 +14,25 @@ import static java.lang.Integer.parseInt;
 @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
 public class MainView extends VerticalLayout {
 
-    public MainView(@Autowired MessageBean bean) {
+    public MainView() {
         MyCounter counter = new MyCounter();
         add(counter);
 
         add(new HorizontalLayout(
                 new Button("setValue(87)",
-                        e1 -> counter.setValue("87")
-                ),
-                new Button("increaseCounter",
-                        e1 -> counter.increaseCounter()
+                        e1 -> counter.setValue(87)
                 ),
                 new Button("decreaseCounter()",
                         e1 -> counter.decreaseCounter()
                 ),
-                new Button("setValue(getValue()+1)",
-                        e1 -> counter.setValue(""+ (parseInt(counter.getValue()) + 1))
+                new Button("increaseCounter()",
+                        e1 -> counter.increaseCounter()
                 ),
                 new Button("setValue(getValue()-1)",
-                        e1 -> counter.setValue(""+(parseInt(counter.getValue()) - 1))
+                        e1 -> counter.setValue(counter.getValue() - 1)
+                ),
+                new Button("setValue(getValue()+1)",
+                        e1 -> counter.setValue(counter.getValue() + 1)
                 )
         ));
 
