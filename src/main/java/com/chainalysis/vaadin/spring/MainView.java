@@ -9,10 +9,7 @@ import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 
-@Route()
-@PWA(name = "My Counter", shortName = "My Counter")
-@Push
-@Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
+@Route("my-counter")
 public class MainView extends VerticalLayout {
 
     public MainView() {
