@@ -1,0 +1,5445 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This API provides functionality for user, organization, enterprise and license management.",
+    "version": "API version 2",
+    "title": "User management API",
+    "termsOfService": "Terms of service",
+    "contact": {
+      "name": "Chainalysis",
+      "url": "https://www.chainalysis.com"
+    },
+    "license": {
+      "name": "License of API",
+      "url": "https://www.chainalysis.com"
+    }
+  },
+  "host": "localhost:8092",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Access Token",
+      "description": "Credentials handling"
+    },
+    {
+      "name": "Authentication",
+      "description": "Authentication handling"
+    },
+    {
+      "name": "Capability",
+      "description": "Capability management"
+    },
+    {
+      "name": "Enterprise",
+      "description": "Enterprise management"
+    },
+    {
+      "name": "Legacy",
+      "description": "Legacy User Administration"
+    },
+    {
+      "name": "License",
+      "description": "License management"
+    },
+    {
+      "name": "Organization",
+      "description": "Organization management"
+    },
+    {
+      "name": "Password",
+      "description": "Password management"
+    },
+    {
+      "name": "Profile",
+      "description": "User profile management"
+    },
+    {
+      "name": "Search",
+      "description": "Search"
+    },
+    {
+      "name": "User",
+      "description": "User management"
+    }
+  ],
+  "paths": {
+    "/api/admin/org/list": {
+      "get": {
+        "tags": [
+          "Legacy"
+        ],
+        "summary": "listOrgs",
+        "operationId": "listOrgs",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/orgsummary"
+              }
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/admin/org/property/set": {
+      "post": {
+        "tags": [
+          "Legacy"
+        ],
+        "summary": "orgPropertySet",
+        "operationId": "orgPropertySet",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "req",
+            "description": "req",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SetOrgPropertiesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "**BadRequest**: Request validation error  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "**LicenseNotFound**: License not found  \n**OrgNotFound**: Organization not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/admin/property/list": {
+      "get": {
+        "tags": [
+          "Legacy"
+        ],
+        "summary": "listProperties",
+        "operationId": "listProperties",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ValidProperties"
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/admin/user/create": {
+      "post": {
+        "tags": [
+          "Legacy"
+        ],
+        "summary": "createUser",
+        "operationId": "createUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "req",
+            "description": "req",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateUserResponse"
+            }
+          },
+          "409": {
+            "description": "**UserAlreadyExists**: User already exists  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/admin/user/delete": {
+      "post": {
+        "tags": [
+          "Legacy"
+        ],
+        "summary": "deleteUser",
+        "operationId": "deleteUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "req",
+            "description": "req",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/admin/user/list": {
+      "get": {
+        "tags": [
+          "Legacy"
+        ],
+        "summary": "listUsers",
+        "operationId": "listUsers",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/usersummary"
+              }
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/admin/user/property/set": {
+      "post": {
+        "tags": [
+          "Legacy"
+        ],
+        "summary": "setUserProperties",
+        "operationId": "setUserProperties",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "req",
+            "description": "req",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SetUserPropertiesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Properties"
+            }
+          },
+          "400": {
+            "description": "**BadRequest**: Request validation error  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/admin/user/resetpassword": {
+      "post": {
+        "tags": [
+          "Legacy"
+        ],
+        "summary": "resetUserPassword",
+        "operationId": "resetUserPassword",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "req",
+            "description": "req",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetUserPasswordRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResetUserPasswordResponse"
+            }
+          },
+          "400": {
+            "description": "**BadRequest**: Request validation error  \n**InvalidEmailAddress**: Provided email address is invalid  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "**EmailCreationFailed**: Email creation failed  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/admin/user/setexpiration": {
+      "post": {
+        "tags": [
+          "Legacy"
+        ],
+        "summary": "setUserExpiration",
+        "operationId": "setUserExpiration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "req",
+            "description": "req",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SetUserExpirationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/admin/userinfo": {
+      "get": {
+        "tags": [
+          "Legacy"
+        ],
+        "summary": "userinfo",
+        "operationId": "userinfo_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserInfoLegacyResponse"
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/enterprise": {
+      "get": {
+        "tags": [
+          "Enterprise"
+        ],
+        "summary": "Fetch a all enterprises",
+        "operationId": "getAllEnterprises",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EnterpriseResponse"
+              }
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Enterprise"
+        ],
+        "summary": "Create an enterprise",
+        "operationId": "create_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Request object that contains data necessary for enterprise creation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnterpriseCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An enterprise has been created",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseResponse"
+            }
+          },
+          "409": {
+            "description": "**EnterpriseAlreadyExists**: Enterprise already exists  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/enterprise/{id}": {
+      "get": {
+        "tags": [
+          "Enterprise"
+        ],
+        "summary": "Fetch a single enterprise",
+        "operationId": "get_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseResponse"
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**EnterpriseNotFound**: Enterprise not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**NotAssignedToEnterprise**: User is not assigned to enterprise(s)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Enterprise"
+        ],
+        "summary": "The enterprise is updated with the not null values",
+        "operationId": "update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Request object that contains data necessary for organization update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnterpriseUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The organization has been updated",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseResponse"
+            }
+          },
+          "404": {
+            "description": "**EnterpriseNotFound**: Enterprise not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**EnterpriseAlreadyExists**: Enterprise already exists  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Enterprise"
+        ],
+        "summary": "Delete an organization",
+        "operationId": "delete_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The organization has been deleted"
+          },
+          "404": {
+            "description": "**EnterpriseNotFound**: Enterprise not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**EnterpriseHasDependencies**: Enterprise still has dependencies (organizations)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/enterprise/{id}/organization": {
+      "get": {
+        "tags": [
+          "Enterprise"
+        ],
+        "summary": "Fetch all enterprise organizations",
+        "operationId": "getOrganizations",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OrganizationResponse"
+              }
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**EnterpriseNotFound**: Enterprise not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**NotAssignedToEnterprise**: User is not assigned to enterprise(s)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/license": {
+      "post": {
+        "tags": [
+          "License"
+        ],
+        "summary": "Create a license",
+        "operationId": "create_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Request object that contains data necessary for license creation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LicenseCreateOrUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A license has been created",
+            "schema": {
+              "$ref": "#/definitions/LicenseResponse"
+            }
+          },
+          "400": {
+            "description": "**ClaimLimitGreaterThenUserLimit**: Claim limit is greater then user limit  \n**EndDateBeforeStartDate**: End date is before start date  \n**EndDateNotInTheFuture**: End Date not in the future  \n**StartAndEndDateEqual**: Start and end date are equal  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "**CapabilityNotFound**: Capability not found  \n**OrgMemberNotFound**: Organization member not found  \n**OrgNotFound**: Organization not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**LicenseUserLimitExceeded**: License user limit has been exceeded  \n**NotAssignedToOrg**: User is not assigned to organization(s)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/license/{id}": {
+      "get": {
+        "tags": [
+          "License"
+        ],
+        "summary": "Fetch a single license",
+        "operationId": "get_2",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LicenseResponse"
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**LicenseNotFound**: License not found  \n**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**NotAssignedToOrg**: User is not assigned to organization(s)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "License"
+        ],
+        "summary": "The license is updated with the provided values",
+        "operationId": "update_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Request object that contains data necessary for license update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LicenseCreateOrUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The license has been updated",
+            "schema": {
+              "$ref": "#/definitions/LicenseResponse"
+            }
+          },
+          "400": {
+            "description": "**ClaimLimitGreaterThenUserLimit**: Claim limit is greater then user limit  \n**EndDateBeforeStartDate**: End date is before start date  \n**EndDateNotInTheFuture**: End Date not in the future  \n**StartAndEndDateEqual**: Start and end date are equal  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "**CapabilityNotFound**: Capability not found  \n**LicenseNotFound**: License not found  \n**OrgMemberNotFound**: Organization member not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**LicenseUserLimitExceeded**: License user limit has been exceeded  \n**NotAssignedToOrg**: User is not assigned to organization(s)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "License"
+        ],
+        "summary": "Delete a license",
+        "operationId": "delete_2",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The license has been deleted"
+          },
+          "404": {
+            "description": "**LicenseNotFound**: License not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**LicenseHasDependencies**: License still has dependencies (members)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/license/{id}/member/{memberId}": {
+      "put": {
+        "tags": [
+          "License"
+        ],
+        "summary": "Assign an organization member to a license",
+        "operationId": "assignMember",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "description": "memberId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The organization member has been assigned"
+          },
+          "404": {
+            "description": "**LicenseNotFound**: License not found  \n**OrgMemberNotFound**: Organization member not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**LicenseUserLimitExceeded**: License user limit has been exceeded  \n**NotAssignedToLicense**: User is not assigned to license(s)  \n**NotAssignedToOrg**: User is not assigned to organization(s)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "410": {
+            "description": "**LicenseExpired**: License has expired  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "License"
+        ],
+        "summary": "Withdraw an organization member from a license",
+        "operationId": "withdrawMember",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "description": "memberId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The organization member has been withdrawn"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "**LicenseNotFound**: License not found  \n**OrgMemberNotFound**: Organization member not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**NotAssignedToLicense**: User is not assigned to license(s)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/license/{id}/renew": {
+      "post": {
+        "tags": [
+          "License"
+        ],
+        "summary": "Renew a license",
+        "operationId": "renew",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The license has been renewed. The renewed license is in the response body",
+            "schema": {
+              "$ref": "#/definitions/LicenseResponse"
+            }
+          },
+          "404": {
+            "description": "**LicenseNotFound**: License not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/organization": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Fetch all organizations",
+        "operationId": "getAllOrganizations",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OrganizationResponse"
+              }
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Create an organization",
+        "operationId": "create_3",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Request object that contains data necessary for organization creation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrganizationCreateOrUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An organization has been created",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "404": {
+            "description": "**EnterpriseNotFound**: Enterprise not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**OrganizationAlreadyExists**: Organization already exists  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/organization/{id}": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Fetch a single organization",
+        "operationId": "get_3",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**OrgNotFound**: Organization not found  \n**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**NotAssignedToOrg**: User is not assigned to organization(s)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "The organization is updated with the not null values",
+        "operationId": "update_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Request object that contains data necessary for organization update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrganizationCreateOrUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The organization has been updated",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "404": {
+            "description": "**EnterpriseNotFound**: Enterprise not found  \n**OrgNotFound**: Organization not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**OrganizationAlreadyExists**: Organization already exists  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Delete an organization",
+        "operationId": "delete_3",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The organization has been deleted"
+          },
+          "404": {
+            "description": "**OrgNotFound**: Organization not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**OrganizationHasDependencies**: Organization still has dependencies (licenses, members)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/organization/{id}/license": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Fetch all organization licenses",
+        "operationId": "getAllLicenses",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LicenseResponse"
+              }
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**OrgNotFound**: Organization not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/organization/{id}/member": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Fetch a all organization members",
+        "operationId": "geAllMembers",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OrgMemberResponse"
+              }
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**OrgNotFound**: Organization not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Assign a user to an organization",
+        "operationId": "assignMember_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Request object that contains data necessary for organization member creation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MemberCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user has been assigned",
+            "schema": {
+              "$ref": "#/definitions/OrgMemberResponse"
+            }
+          },
+          "404": {
+            "description": "**OrgMemberNotFound**: Organization member not found  \n**OrgNotFound**: Organization not found  \n**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**UserAlreadyAssignedToOrganization**: User is already assigned to organization  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/organization/{id}/member/{memberId}": {
+      "delete": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Withdraw an organization member from an organization",
+        "operationId": "withdrawMember_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "description": "memberId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The organization member has been withdrawn"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "**OrgNotFound**: Organization not found  \n**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**NotAssignedToOrg**: User is not assigned to organization(s)  \n**UserWithoutOrgAssignments**: User has only one organization assignment.  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/search": {
+      "post": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Search for users, organizations, enterprises and licenses",
+        "operationId": "create_4",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Search query and document types",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User search result",
+            "schema": {
+              "$ref": "#/definitions/SearchUserResponse"
+            }
+          },
+          "400": {
+            "description": "**InvalidCharacters**: Provided characters are not supported  \n**InvalidSearchDocumentType**: Provided search document type is invalid  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/user": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create a user",
+        "operationId": "create_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Request object that contains data necessary for account creation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A user has been created",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "400": {
+            "description": "**InvalidEmailAddress**: Provided email address is invalid  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "**OrgMemberNotFound**: Organization member not found  \n**OrgNotFound**: Organization not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**UserAlreadyAssignedToOrganization**: User is already assigned to organization  \n**UserAlreadyExists**: User already exists  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "**EmailCreationFailed**: Email creation failed  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/admin/user/{id}/request-password-reset": {
+      "post": {
+        "tags": [
+          "Authentication",
+          "Password"
+        ],
+        "summary": "Request an account reset token for a user",
+        "operationId": "requestResetUserPassword",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "req",
+            "description": "req",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdminRequestResetPasswordRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response of a credentials reset request"
+            }
+          },
+          "400": {
+            "description": "**InvalidEmailAddress**: Provided email address is invalid  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "**EmailCreationFailed**: Email creation failed  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/auth/capability": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "capability",
+        "description": "Retrieve or check the capabilities of the current user.",
+        "operationId": "capability",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "require",
+            "in": "query",
+            "description": "require",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a comma separated list of capabilities of the current user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "403": {
+            "description": "**AccessDenied**: If the user lacks any of the required capabilities.  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login",
+        "description": "Login with the given credentials.",
+        "operationId": "login",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "credentials",
+            "description": "credentials",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginCredentials"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful login.",
+            "schema": {
+              "$ref": "#/definitions/LoginInfo"
+            }
+          },
+          "500": {
+            "description": "**InternalServerError**: Failed login.  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/auth/logout": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logout",
+        "description": "Logout the current user.",
+        "operationId": "logout",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the name of the user that was logged out.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/auth/request-password-reset": {
+      "post": {
+        "tags": [
+          "Password"
+        ],
+        "summary": "Request an account reset",
+        "operationId": "anonymousRequestResetUserPassword",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "req",
+            "description": "req",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnonymousRequestResetPasswordRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response of a credentials reset request"
+            }
+          },
+          "400": {
+            "description": "**InvalidEmailAddress**: Provided email address is invalid  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "429": {
+            "description": "**TooManyRequests**: Try again later  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "**EmailCreationFailed**: Email creation failed  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/auth/reset": {
+      "post": {
+        "tags": [
+          "Authentication",
+          "Password"
+        ],
+        "summary": "Resets the password based on a reset token",
+        "operationId": "resetCredentials",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "req",
+            "description": "req",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/The updated credentials"
+            }
+          },
+          "404": {
+            "description": "**UserNotFound**: The token is not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/auth/token": {
+      "post": {
+        "tags": [
+          "Access Token"
+        ],
+        "summary": "Create an access token",
+        "operationId": "create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Request object that contains data necessary for access token creation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessTokenCreateRequest"
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An access token has been created",
+            "schema": {
+              "$ref": "#/definitions/AccessTokenResponse"
+            }
+          },
+          "404": {
+            "description": "**OrgNotFound**: Organization not found  \n**ProductNotFound**: Product not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**LicenseCannotBeClaimed**: License cannot be claimed  \n**NotAssignedToOrg**: User is not assigned to organization(s)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "410": {
+            "description": "**OrganizationMemberShipExpired**: Organization membership has expired  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/auth/token/apikey": {
+      "post": {
+        "tags": [
+          "Access Token"
+        ],
+        "summary": "Create an api key for the specified user name",
+        "operationId": "createApiKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Request object that contains data necessary for api key creation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiKeyAdminCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An api key has been created",
+            "schema": {
+              "$ref": "#/definitions/ApiKeyResponse"
+            }
+          },
+          "404": {
+            "description": "**LicenseNotFound**: License not found  \n**OrgNotFound**: Organization not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**LicenseCannotBeClaimed**: License cannot be claimed  \n**NotAssignedToLicense**: User is not assigned to license(s)  \n**NotAssignedToOrg**: User is not assigned to organization(s)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "410": {
+            "description": "**OrganizationMemberShipExpired**: Organization membership has expired  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/auth/token/{token}": {
+      "get": {
+        "tags": [
+          "Access Token"
+        ],
+        "summary": "Fetch a single access token",
+        "operationId": "get",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "productName",
+            "in": "query",
+            "description": "Name of the Chainalysis product for which the token has been created",
+            "required": true,
+            "type": "string",
+            "allowEmptyValue": false
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessTokenResponse"
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**AccessTokenNotFound**: Access token not found  \n**ProductNotFound**: Product not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "410": {
+            "description": "**AccessTokenExpired**: Access token has expired  \n**OrganizationMemberShipExpired**: Organization membership has expired  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Access Token"
+        ],
+        "summary": "Delete an access token",
+        "operationId": "delete",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "description": "token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "access token has been deleted",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "**ResourceNotFound**: Resource not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/auth/userinfo": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Userinfo",
+        "description": "Reports information about the currently authenticated user",
+        "operationId": "userinfo",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AuthProfile"
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/product/{productName}/capability": {
+      "get": {
+        "tags": [
+          "Capability"
+        ],
+        "summary": "Fetch all product capabilities",
+        "operationId": "getProductCapabilities",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "productName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CapabilityMinResponse"
+              }
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**ProductNotFound**: Product not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/profile": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "summary": "Get the user profile",
+        "operationId": "getUserProfile",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Profile"
+        ],
+        "summary": "The user profile is updated with the not null values",
+        "operationId": "updateUserProfile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "update",
+            "description": "update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfileUpdateRequest"
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user has been updated"
+          },
+          "404": {
+            "description": "**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/profile/apikey": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "summary": "Fetch all api keys of a user",
+        "operationId": "getApiKeys",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApiKeyResponse"
+              }
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Profile"
+        ],
+        "summary": "Create an api key",
+        "operationId": "createApiKey_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Request object that contains data necessary for api key creation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiKeyCreateRequest"
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An api key has been created",
+            "schema": {
+              "$ref": "#/definitions/ApiKeyResponse"
+            }
+          },
+          "404": {
+            "description": "**LicenseNotFound**: License not found  \n**OrgNotFound**: Organization not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**LicenseCannotBeClaimed**: License cannot be claimed  \n**NotAssignedToLicense**: User is not assigned to license(s)  \n**NotAssignedToOrg**: User is not assigned to organization(s)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "410": {
+            "description": "**OrganizationMemberShipExpired**: Organization membership has expired  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/profile/apikey/{token}": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "summary": "Fetch a single api key",
+        "operationId": "getApiKey",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiKeyResponse"
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**ApiKeyNotFound**: Api key not found  \n**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Profile"
+        ],
+        "summary": "Delete an api key",
+        "operationId": "deleteApiKey",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "description": "token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "api key has been deleted",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "**AccessTokenNotFound**: Access token not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/profile/license": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "summary": "List the license assigments of the current user",
+        "operationId": "listLicenceAssignments",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProfileLicense"
+              }
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/profile/license/{id}": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "summary": "Get a specific license assignment of the current user",
+        "operationId": "getLicenseAssignment",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProfileLicense"
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**LicenseCannotBeClaimed**: License cannot be claimed  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/profile/organization": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "summary": "Get the organization membership details of the current user",
+        "operationId": "listOrganizationMembership",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProfileOrgMembership"
+              }
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/profile/organization/{id}": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "summary": "Get the current user membership details of an organization",
+        "operationId": "getOrganization",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProfileOrgMembership"
+            }
+          },
+          "403": {
+            "description": "Access forbidden!"
+          },
+          "404": {
+            "description": "**UserNotFound**: User not found  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "**NotAssignedToOrg**: User is not assigned to organization(s)  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error!",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/sso/profile/request-password-reset": {
+      "post": {
+        "tags": [
+          "Profile",
+          "Password"
+        ],
+        "summary": "Reqeust a reset token for the users own account",
+        "operationId": "requestResetCredentials",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "authorities[0].authority",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentialsNonExpired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "req",
+            "description": "req",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Reset password parameters"
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response of a credentials reset request"
+            }
+          },
+          "400": {
+            "description": "**InvalidEmailAddress**: Provided email address is invalid  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "**EmailCreationFailed**: Email creation failed  ",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "token": []
+          }
+        ],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    },
+    "csrf": {
+      "type": "apiKey",
+      "name": "x-csrf-token",
+      "in": "header"
+    },
+    "token": {
+      "type": "apiKey",
+      "name": "Token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "AccessTokenCreateRequest": {
+      "type": "object",
+      "properties": {
+        "orgId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Database generated organization id"
+        },
+        "productName": {
+          "type": "string",
+          "example": "Reactor",
+          "description": "Name of the Chainalysis product"
+        }
+      },
+      "title": "AccessTokenCreateRequest"
+    },
+    "AccessTokenResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The token label"
+        },
+        "creationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Milliseconds since the unix epoch when the access token was created"
+        },
+        "expirationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Milliseconds since the unix epoch when the access token will expire"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "A list of all license capabilities claimed by this access token and the user permissions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userName": {
+          "type": "string",
+          "description": "The username of the user owning the token"
+        },
+        "orgId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The org ID of the token"
+        }
+      },
+      "title": "AccessTokenResponse"
+    },
+    "AdminRequestResetPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "sendEmail": {
+          "type": "boolean"
+        }
+      },
+      "title": "AdminRequestResetPasswordRequest"
+    },
+    "AnonymousRequestResetPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "The user name"
+        }
+      },
+      "title": "AnonymousRequestResetPasswordRequest"
+    },
+    "ApiKey": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "creationDate": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expirationDate": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ApiKey"
+    },
+    "ApiKeyAdminCreateRequest": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "example": "john.doe@example.com",
+          "description": "The user name for which the API key will be created"
+        },
+        "orgId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Database generated organization id"
+        },
+        "licenses": {
+          "type": "array",
+          "description": "List of license ids",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "daysValid": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Days till expiration"
+        }
+      },
+      "title": "ApiKeyAdminCreateRequest"
+    },
+    "ApiKeyCreateRequest": {
+      "type": "object",
+      "properties": {
+        "orgId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Database generated organization id"
+        },
+        "licenses": {
+          "type": "array",
+          "description": "List of license ids",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "daysValid": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Days till expiration"
+        }
+      },
+      "title": "ApiKeyCreateRequest"
+    },
+    "ApiKeyResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The token label"
+        },
+        "creationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Milliseconds since the unix epoch when the access token was created"
+        },
+        "expirationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Milliseconds since the unix epoch when the access token will expire"
+        },
+        "licenseIds": {
+          "type": "array",
+          "description": "A list of all license IDs claimed by this access token",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "userName": {
+          "type": "string",
+          "description": "The username of the user owning the token"
+        },
+        "orgId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The org ID of the token"
+        },
+        "expired": {
+          "type": "boolean",
+          "description": "True if api key has expired"
+        }
+      },
+      "title": "ApiKeyResponse"
+    },
+    "AuthProfile": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "The user name of the user"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "The given name of the user"
+        },
+        "userPermissions": {
+          "type": "array",
+          "description": "The permissions of this user",
+          "items": {
+            "type": "string"
+          }
+        },
+        "csrfToken": {
+          "type": "string",
+          "description": "The current csrf token"
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The unique ID of the user"
+        },
+        "accountCreationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The date this account was created"
+        },
+        "organizations": {
+          "type": "array",
+          "description": "List of organizations the user is a member of",
+          "items": {
+            "$ref": "#/definitions/OrgMembership"
+          }
+        }
+      },
+      "title": "AuthProfile",
+      "description": "Authenticated user information"
+    },
+    "CapabilityDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "product": {
+          "$ref": "#/definitions/ProductResponse"
+        }
+      },
+      "title": "CapabilityDetail"
+    },
+    "CapabilityMinResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Capability database id"
+        },
+        "identifier": {
+          "type": "string",
+          "description": "Capability identifier"
+        },
+        "label": {
+          "type": "string",
+          "description": "Capability label"
+        }
+      },
+      "title": "CapabilityMinResponse"
+    },
+    "CreateUserRequest": {
+      "type": "object",
+      "properties": {
+        "daysValid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "orgName": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string",
+          "example": "john.doe@example.com",
+          "description": "Must be a valid email address"
+        }
+      },
+      "title": "CreateUserRequest"
+    },
+    "CreateUserResponse": {
+      "type": "object",
+      "properties": {
+        "accountResetToken": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "CreateUserResponse"
+    },
+    "DeleteUserRequest": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "DeleteUserRequest"
+    },
+    "EnterpriseCreateRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the enterprise"
+        }
+      },
+      "title": "EnterpriseCreateRequest"
+    },
+    "EnterpriseMinResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Enterprise database id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Enterprise name"
+        },
+        "creationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Enterprise creation date"
+        }
+      },
+      "title": "EnterpriseMinResponse"
+    },
+    "EnterpriseResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Enterprise database id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Enterprise name"
+        },
+        "creationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Enterprise creation date"
+        },
+        "organizations": {
+          "type": "array",
+          "description": "Enterprise organizations",
+          "items": {
+            "$ref": "#/definitions/OrganizationMinResponse"
+          }
+        }
+      },
+      "title": "EnterpriseResponse"
+    },
+    "EnterpriseUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the enterprise"
+        }
+      },
+      "title": "EnterpriseUpdateRequest"
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "example": "Internal Server Error",
+          "description": "Based on https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml"
+        },
+        "errorCode": {
+          "type": "string",
+          "example": "ResourceNotFound",
+          "description": "Chainalysis defined error codes"
+        },
+        "message": {
+          "type": "string",
+          "example": "An error occured",
+          "description": "Exception message"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "example": 500,
+          "description": "Based on https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64",
+          "example": 1505914698744,
+          "description": "Milliseconds since midnight, January 1, 1970 UTC"
+        }
+      },
+      "title": "Error",
+      "description": "Basic Error Format"
+    },
+    "LicenseAssignment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Id of the organization"
+        },
+        "validFrom": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "validTo": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expired": {
+          "type": "boolean"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "apiKeys": {
+          "type": "array",
+          "description": "Active api keys",
+          "items": {
+            "$ref": "#/definitions/ApiKey"
+          }
+        }
+      },
+      "title": "LicenseAssignment"
+    },
+    "LicenseCreateOrUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "orgId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Database generated organization id"
+        },
+        "validFrom": {
+          "type": "integer",
+          "format": "int64",
+          "description": "License validity start date"
+        },
+        "validTo": {
+          "type": "integer",
+          "format": "int64",
+          "description": "License validity end date"
+        },
+        "claimLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "License claim limit"
+        },
+        "userLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "License user limit"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "License capabilities",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "members": {
+          "type": "array",
+          "description": "License members",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "reference": {
+          "type": "string",
+          "description": "License free text reference"
+        }
+      },
+      "title": "LicenseCreateOrUpdateRequest"
+    },
+    "LicenseResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "License database id"
+        },
+        "organization": {
+          "description": "License organization details",
+          "$ref": "#/definitions/OrganizationMinResponse"
+        },
+        "creationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "License creation date "
+        },
+        "validFrom": {
+          "type": "integer",
+          "format": "int64",
+          "description": "License validity start date "
+        },
+        "validTo": {
+          "type": "integer",
+          "format": "int64",
+          "description": "License validity end date "
+        },
+        "claimLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "License claim limit"
+        },
+        "userLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "License user limit"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "License capabilities",
+          "items": {
+            "$ref": "#/definitions/CapabilityDetail"
+          }
+        },
+        "members": {
+          "type": "array",
+          "description": "License members",
+          "items": {
+            "$ref": "#/definitions/OrgMemberResponse"
+          }
+        },
+        "reference": {
+          "type": "string",
+          "description": "License free text reference"
+        }
+      },
+      "title": "LicenseResponse"
+    },
+    "LoginCredentials": {
+      "type": "object",
+      "required": [
+        "password",
+        "user"
+      ],
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "User password"
+        },
+        "user": {
+          "type": "string",
+          "description": "User name"
+        }
+      },
+      "title": "LoginCredentials"
+    },
+    "LoginInfo": {
+      "type": "object",
+      "required": [
+        "token",
+        "user"
+      ],
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "CSRF token"
+        },
+        "user": {
+          "type": "string",
+          "description": "User name"
+        }
+      },
+      "title": "LoginInfo"
+    },
+    "MemberCreateRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Database generated user id"
+        }
+      },
+      "title": "MemberCreateRequest"
+    },
+    "OrgMemberMinResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Organization member database id"
+        },
+        "orgId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The organization database id"
+        }
+      },
+      "title": "OrgMemberMinResponse"
+    },
+    "OrgMemberResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Organization member database id"
+        },
+        "creationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Organization member creation date"
+        },
+        "expirationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Organization member expiration date"
+        },
+        "lastActivity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Organization member last activity"
+        },
+        "user": {
+          "description": "User details of the Organization member",
+          "$ref": "#/definitions/UserMinResponse"
+        }
+      },
+      "title": "OrgMemberResponse"
+    },
+    "OrgMembership": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Id of the organization"
+        },
+        "enterpriseName": {
+          "type": "string",
+          "description": "Name of the enterprise"
+        },
+        "orgName": {
+          "type": "string",
+          "description": "Name of the organization"
+        },
+        "expirationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The membership expiration time"
+        },
+        "expired": {
+          "type": "boolean",
+          "description": "The membership has expired?"
+        },
+        "lastActivity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The last user activity regarding this organization"
+        },
+        "licenses": {
+          "type": "array",
+          "description": "Assigned licenses",
+          "items": {
+            "$ref": "#/definitions/LicenseAssignment"
+          }
+        }
+      },
+      "title": "OrgMembership"
+    },
+    "OrganizationCreateOrUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "enterpriseId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Database generated enterprise id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the organization"
+        },
+        "reference": {
+          "type": "string",
+          "description": "Organization free text reference field"
+        }
+      },
+      "title": "OrganizationCreateOrUpdateRequest"
+    },
+    "OrganizationMinResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Organization database id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Organization name"
+        }
+      },
+      "title": "OrganizationMinResponse"
+    },
+    "OrganizationResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Organization database id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Organization name"
+        },
+        "creationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Organization creation date"
+        },
+        "reference": {
+          "type": "string",
+          "description": "Organization free text reference"
+        },
+        "enterprise": {
+          "description": "Organization enterprise details",
+          "$ref": "#/definitions/EnterpriseMinResponse"
+        }
+      },
+      "title": "OrganizationResponse"
+    },
+    "PermissionDetail": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "title": "PermissionDetail"
+    },
+    "ProductResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Product database id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Product name"
+        }
+      },
+      "title": "ProductResponse"
+    },
+    "Profile": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "The user name of the user"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "The given name of the user"
+        },
+        "userPermissions": {
+          "type": "array",
+          "description": "The permissions of this user",
+          "items": {
+            "$ref": "#/definitions/PermissionDetail"
+          }
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The pseudo-unique UUID of the user"
+        },
+        "accountCreationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The date this account was created"
+        }
+      },
+      "title": "Profile",
+      "description": "Authenticated user information"
+    },
+    "ProfileLicense": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Id of the license"
+        },
+        "organization": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Id of the organization"
+        },
+        "validFrom": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "validTo": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expired": {
+          "type": "boolean"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapabilityDetail"
+          }
+        }
+      },
+      "title": "ProfileLicense"
+    },
+    "ProfileOrgMembership": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Id of the organization"
+        },
+        "enterpriseName": {
+          "type": "string",
+          "description": "Name of the enterprise"
+        },
+        "orgName": {
+          "type": "string",
+          "description": "Name of the organization"
+        },
+        "expirationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The membership expiration time"
+        },
+        "expired": {
+          "type": "boolean",
+          "description": "The membership has expired?"
+        },
+        "lastActivity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The last user activity regarding this organization"
+        }
+      },
+      "title": "ProfileOrgMembership"
+    },
+    "ProfileUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "description": "The full name of the user"
+        }
+      },
+      "title": "ProfileUpdateRequest"
+    },
+    "Properties": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Property"
+          }
+        }
+      },
+      "title": "Properties"
+    },
+    "Property": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": "Property"
+    },
+    "Reset password parameters": {
+      "type": "object",
+      "title": "Reset password parameters"
+    },
+    "ResetRequest": {
+      "type": "object",
+      "properties": {
+        "accountResetToken": {
+          "type": "string",
+          "description": "The token that the user recieved by mail"
+        }
+      },
+      "title": "ResetRequest"
+    },
+    "ResetUserPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "sendEmail": {
+          "type": "boolean",
+          "description": "Send email instead"
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "ResetUserPasswordRequest"
+    },
+    "ResetUserPasswordResponse": {
+      "type": "object",
+      "properties": {
+        "accountResetToken": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "ResetUserPasswordResponse"
+    },
+    "Response of a credentials reset request": {
+      "type": "object",
+      "properties": {
+        "accountResetToken": {
+          "type": "string",
+          "description": "The account reset token allows a onetime password reset for this user"
+        }
+      },
+      "title": "Response of a credentials reset request"
+    },
+    "ResponseEntity": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object"
+        },
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "100 CONTINUE",
+            "101 SWITCHING_PROTOCOLS",
+            "102 PROCESSING",
+            "103 CHECKPOINT",
+            "200 OK",
+            "201 CREATED",
+            "202 ACCEPTED",
+            "203 NON_AUTHORITATIVE_INFORMATION",
+            "204 NO_CONTENT",
+            "205 RESET_CONTENT",
+            "206 PARTIAL_CONTENT",
+            "207 MULTI_STATUS",
+            "208 ALREADY_REPORTED",
+            "226 IM_USED",
+            "300 MULTIPLE_CHOICES",
+            "301 MOVED_PERMANENTLY",
+            "302 FOUND",
+            "302 MOVED_TEMPORARILY",
+            "303 SEE_OTHER",
+            "304 NOT_MODIFIED",
+            "305 USE_PROXY",
+            "307 TEMPORARY_REDIRECT",
+            "308 PERMANENT_REDIRECT",
+            "400 BAD_REQUEST",
+            "401 UNAUTHORIZED",
+            "402 PAYMENT_REQUIRED",
+            "403 FORBIDDEN",
+            "404 NOT_FOUND",
+            "405 METHOD_NOT_ALLOWED",
+            "406 NOT_ACCEPTABLE",
+            "407 PROXY_AUTHENTICATION_REQUIRED",
+            "408 REQUEST_TIMEOUT",
+            "409 CONFLICT",
+            "410 GONE",
+            "411 LENGTH_REQUIRED",
+            "412 PRECONDITION_FAILED",
+            "413 PAYLOAD_TOO_LARGE",
+            "413 REQUEST_ENTITY_TOO_LARGE",
+            "414 URI_TOO_LONG",
+            "414 REQUEST_URI_TOO_LONG",
+            "415 UNSUPPORTED_MEDIA_TYPE",
+            "416 REQUESTED_RANGE_NOT_SATISFIABLE",
+            "417 EXPECTATION_FAILED",
+            "418 I_AM_A_TEAPOT",
+            "419 INSUFFICIENT_SPACE_ON_RESOURCE",
+            "420 METHOD_FAILURE",
+            "421 DESTINATION_LOCKED",
+            "422 UNPROCESSABLE_ENTITY",
+            "423 LOCKED",
+            "424 FAILED_DEPENDENCY",
+            "426 UPGRADE_REQUIRED",
+            "428 PRECONDITION_REQUIRED",
+            "429 TOO_MANY_REQUESTS",
+            "431 REQUEST_HEADER_FIELDS_TOO_LARGE",
+            "451 UNAVAILABLE_FOR_LEGAL_REASONS",
+            "500 INTERNAL_SERVER_ERROR",
+            "501 NOT_IMPLEMENTED",
+            "502 BAD_GATEWAY",
+            "503 SERVICE_UNAVAILABLE",
+            "504 GATEWAY_TIMEOUT",
+            "505 HTTP_VERSION_NOT_SUPPORTED",
+            "506 VARIANT_ALSO_NEGOTIATES",
+            "507 INSUFFICIENT_STORAGE",
+            "508 LOOP_DETECTED",
+            "509 BANDWIDTH_LIMIT_EXCEEDED",
+            "510 NOT_EXTENDED",
+            "511 NETWORK_AUTHENTICATION_REQUIRED"
+          ]
+        },
+        "statusCodeValue": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "ResponseEntity"
+    },
+    "SearchDocumentResponse": {
+      "type": "object",
+      "properties": {
+        "documentType": {
+          "type": "string",
+          "description": "The document type of the search result"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The database id of the search result"
+        }
+      },
+      "title": "SearchDocumentResponse"
+    },
+    "SearchEnterpriseResponse": {
+      "type": "object",
+      "properties": {
+        "documentType": {
+          "type": "string",
+          "description": "The document type of the search result"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The database id of the search result"
+        },
+        "name": {
+          "type": "string",
+          "description": "Enterprise name"
+        }
+      },
+      "title": "SearchEnterpriseResponse"
+    },
+    "SearchLicenseResponse": {
+      "type": "object",
+      "properties": {
+        "documentType": {
+          "type": "string",
+          "description": "The document type of the search result"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The database id of the search result"
+        },
+        "reference": {
+          "type": "string",
+          "description": "License reference"
+        }
+      },
+      "title": "SearchLicenseResponse"
+    },
+    "SearchOrgResponse": {
+      "type": "object",
+      "properties": {
+        "documentType": {
+          "type": "string",
+          "description": "The document type of the search result"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The database id of the search result"
+        },
+        "name": {
+          "type": "string",
+          "description": "Organization name"
+        },
+        "reference": {
+          "type": "string",
+          "description": "Organization reference"
+        }
+      },
+      "title": "SearchOrgResponse"
+    },
+    "SearchRequest": {
+      "type": "object",
+      "required": [
+        "documentTypes",
+        "query"
+      ],
+      "properties": {
+        "documentTypes": {
+          "type": "array",
+          "description": "The document types to search for",
+          "items": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "ENTERPRISE",
+              "ORGANIZATION",
+              "LICENSE"
+            ]
+          }
+        },
+        "query": {
+          "type": "string",
+          "description": "The term to search for"
+        }
+      },
+      "title": "SearchRequest"
+    },
+    "SearchUserResponse": {
+      "type": "object",
+      "properties": {
+        "documentType": {
+          "type": "string",
+          "description": "The document type of the search result"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "Account full name"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The database id of the search result"
+        },
+        "reference": {
+          "type": "string",
+          "description": "Account reference"
+        },
+        "userName": {
+          "type": "string",
+          "description": "Account user name"
+        }
+      },
+      "title": "SearchUserResponse"
+    },
+    "SetOrgPropertiesRequest": {
+      "type": "object",
+      "properties": {
+        "orgName": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Property"
+          }
+        }
+      },
+      "title": "SetOrgPropertiesRequest"
+    },
+    "SetUserExpirationRequest": {
+      "type": "object",
+      "properties": {
+        "daysValid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "SetUserExpirationRequest"
+    },
+    "SetUserPropertiesRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Property"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "SetUserPropertiesRequest"
+    },
+    "The updated credentials": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "Account user name"
+        },
+        "password": {
+          "type": "string",
+          "description": "Account password"
+        }
+      },
+      "title": "The updated credentials"
+    },
+    "UserCreateRequest": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "example": "john.doe@example.com",
+          "description": "Must be a valid email address"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "User creation date"
+        },
+        "sendEmail": {
+          "type": "boolean",
+          "description": "Indicates if the user credentials should be sent by email"
+        },
+        "reference": {
+          "type": "string",
+          "description": "User free text reference field"
+        },
+        "orgId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Database generated organization id. The user will be automatically assigned to this organization"
+        }
+      },
+      "title": "UserCreateRequest"
+    },
+    "UserInfoLegacyResponse": {
+      "type": "object",
+      "properties": {
+        "accountCreationDate": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "csrfToken": {
+          "type": "string"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "organizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrgMembership"
+          }
+        },
+        "userName": {
+          "type": "string"
+        },
+        "userProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uuid": {
+          "type": "string"
+        }
+      },
+      "title": "UserInfoLegacyResponse"
+    },
+    "UserMinResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Account database id"
+        },
+        "userName": {
+          "type": "string",
+          "description": "Account user name"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "Account full name"
+        }
+      },
+      "title": "UserMinResponse"
+    },
+    "UserResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Account database id"
+        },
+        "creationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Account creation date"
+        },
+        "userName": {
+          "type": "string",
+          "description": "Account user name"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "Account creation date"
+        },
+        "reference": {
+          "type": "string",
+          "description": "Account free text reference field"
+        },
+        "orgMemberships": {
+          "type": "array",
+          "description": "List of users organization memberships",
+          "items": {
+            "$ref": "#/definitions/OrgMemberMinResponse"
+          }
+        }
+      },
+      "title": "UserResponse"
+    },
+    "ValidProperties": {
+      "type": "object",
+      "properties": {
+        "booleanOrgProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "booleanUserProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "ValidProperties"
+    },
+    "orgsummary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of an organization"
+        },
+        "properties": {
+          "description": "The properties of an organization",
+          "$ref": "#/definitions/Properties"
+        }
+      },
+      "title": "orgsummary"
+    },
+    "usersummary": {
+      "type": "object",
+      "properties": {
+        "orgProperties": {
+          "description": "The properties of the organization the user belongs to",
+          "$ref": "#/definitions/Properties"
+        },
+        "userProperties": {
+          "description": "The properties of this user",
+          "$ref": "#/definitions/Properties"
+        },
+        "userName": {
+          "type": "string",
+          "description": "The user name of the user"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "The full name of the user"
+        },
+        "orgName": {
+          "type": "string",
+          "description": "The organization that the user belongs to"
+        },
+        "creationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The unix epoch time when the account was created"
+        },
+        "expirationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The unix epoch time when the account expires"
+        },
+        "lastActivity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The unix epoch time when the account was last active"
+        }
+      },
+      "title": "usersummary"
+    }
+  }
+}
