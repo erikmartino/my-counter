@@ -21,16 +21,17 @@ public class MyCounter extends Component {
     }
 
     // Events from client side to server side
-    public Registration addChangeListener(
-            ComponentEventListener<CountEvent> listener) {
-        return addListener(CountEvent.class, listener);
-    }
 
     @DomEvent("count")
     public static class CountEvent extends ComponentEvent<MyCounter> {
         public CountEvent(MyCounter source, boolean fromClient) {
             super(source, fromClient);
         }
+    }
+
+    public Registration addCountListener(
+            ComponentEventListener<CountEvent> listener) {
+        return addListener(CountEvent.class, listener);
     }
 
     // call methods client side

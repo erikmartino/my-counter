@@ -4,11 +4,15 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.Push;
+import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 
-@Route
-@PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
+@Route()
+@PWA(name = "My Counter", shortName = "My Counter")
+@Push
+@Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainView extends VerticalLayout {
 
     public MainView() {
@@ -35,7 +39,7 @@ public class MainView extends VerticalLayout {
 
         Label label = new Label();
         updateLabelText(counter, label);
-        counter.addChangeListener(e -> updateLabelText(counter, label));
+        counter.addCountListener(e -> updateLabelText(counter, label));
         add(label);
 
     }
