@@ -52,7 +52,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
 
         init(AppLayoutBuilder
                 .get(Behaviour.LEFT_HYBRID)
-                .withTitle("App Layout")
+                .withTitle("User Management")
                 .withAppBar(appBar)
                 .withAppMenu(appMenu)
                 .withTheme(Material.class)
