@@ -24,15 +24,13 @@ import com.vaadin.flow.theme.material.Material;
 @Theme(Material.class)
 @PWA(name = "User Management", shortName = "Uman")
 public class MainAppLayout extends AppLayoutRouterLayout {
-    private DefaultNotificationHolder notifications;
-    private DefaultBadgeHolder badge;
 
     public MainAppLayout() {
 
-        notifications = new DefaultNotificationHolder(newStatus -> {
+        DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
         });
 
-        badge = new DefaultBadgeHolder();
+        DefaultBadgeHolder badge = new DefaultBadgeHolder();
 
         Component appBar = AppBarBuilder
                 .get()
