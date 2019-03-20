@@ -42,16 +42,10 @@ export class MyCounter extends HTMLElement {
 
     increaseCounter() {
         this.value++;
-        this.dispatchEvent(new CustomEvent("action", {
-            detail: "increase"
-        }));
     }
 
     decreaseCounter() {
         this.value--;
-        this.dispatchEvent(new CustomEvent("action", {
-            detail: "decrease"
-        }));
     }
 
     connectedCallback() {
