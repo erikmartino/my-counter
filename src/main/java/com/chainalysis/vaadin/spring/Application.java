@@ -21,13 +21,6 @@ import java.util.List;
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) throws ApiException {
-//        ApiClient a = new ApiClient();
-//        a.setBasePath("http://localhost:8092");
-//        ApiKeyAuth token = (ApiKeyAuth) a.getAuthentication("token");
-//        token.setApiKey("cd6a5e6c79c1d9b9128fc13bdea5aec66e5553ee8b999028cd5989578e71dfde");
-//        LegacyApi aa = new LegacyApi(a);
-//        List<Orgsummary> rr = aa.listOrgs();
-//        System.exit(10);
         SpringApplication.run(Application.class, args);
     }
 

@@ -45,6 +45,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
 //                ), HEADER)
                 .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), HomeLayout.class))
                 .add(new LeftNavigationComponent("Users", VaadinIcon.USER.create(), UsersLayout.class))
+                .add(new LeftNavigationComponent("Crud", VaadinIcon.USER.create(), UsersCrudLayout.class))
                 .add(new LeftNavigationComponent("Organizations", VaadinIcon.GROUP.create(), OrgLayout.class))
                 .build();
 
