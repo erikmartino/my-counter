@@ -20,3 +20,6 @@ target
 .gradle
 build
 /config/application.properties
+.swagger-codegen/
+gradle/
+src/test/
