@@ -1,5 +1,6 @@
 package com.chainalysis.vaadin.spring;
 
+import com.chainalysis.vaadin.spring.crud.TestUI;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
@@ -45,7 +46,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
 //                ), HEADER)
                 .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), HomeLayout.class))
                 .add(new LeftNavigationComponent("Users", VaadinIcon.USER.create(), UsersLayout.class))
-                .add(new LeftNavigationComponent("Crud", VaadinIcon.USER.create(), UsersCrudLayout.class))
+                .add(new LeftNavigationComponent("Crud", VaadinIcon.USER.create(), TestUI.class))
                 .add(new LeftNavigationComponent("Organizations", VaadinIcon.GROUP.create(), OrgLayout.class))
                 .build();
 
