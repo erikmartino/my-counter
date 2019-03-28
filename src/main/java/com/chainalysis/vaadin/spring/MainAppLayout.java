@@ -35,7 +35,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
 
         Component appBar = AppBarBuilder
                 .get()
-                .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
+                .add(new AppBarNotificationButton(VaadinIcon.BELL_O, notifications))
                 .build();
 
         NavigationElementContainer appMenu = LeftAppMenuBuilder

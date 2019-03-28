@@ -44,7 +44,7 @@ public class ServerSideLogicView extends VerticalLayout {
         int value = counter.getValue();
         label.setText("The counter is now " + value);
         if (value == 90) {
-            Notification.show("The counter was reset to 90");
+            Notification.show("The counter was set to 90");
         }
     }
 }
