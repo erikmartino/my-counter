@@ -4,27 +4,22 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.page.Push;
-import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.PWA;
 
-@Route("my-counter")
-public class MainView extends VerticalLayout {
+@Route(value = "serverside", layout = MainAppLayout.class)
+public class ServerSideLogicView extends VerticalLayout {
+    MyCounter counter;
+    Label label;
 
-    public MainView() {
-        MyCounter counter = new MyCounter();
+    public ServerSideLogicView() {
+        add(new Label("Uses attribute synchronization to modify the counters"));
+
+        counter = new MyCounter();
         add(counter);
 
         add(new HorizontalLayout(
                 new Button("setValue(87)",
                         e1 -> counter.setValue(87)
-                ),
-                new Button("decreaseCounter()",
-                        e1 -> counter.decreaseCounter()
-                ),
-                new Button("increaseCounter()",
-                        e1 -> counter.increaseCounter()
                 ),
                 new Button("setValue(getValue()-1)",
                         e1 -> counter.setValue(counter.getValue() - 1)
@@ -34,14 +29,14 @@ public class MainView extends VerticalLayout {
                 )
         ));
 
-        Label label = new Label();
-        updateLabelText(counter, label);
-        counter.addCountListener(e -> updateLabelText(counter, label));
+        label = new Label();
         add(label);
 
+        counter.addCountListener(e -> updateLabelText());
+        updateLabelText();
     }
 
-    private void updateLabelText(MyCounter counter, Label label) {
+    private void updateLabelText() {
         label.setText("The counter is now " + counter.getValue());
     }
 }

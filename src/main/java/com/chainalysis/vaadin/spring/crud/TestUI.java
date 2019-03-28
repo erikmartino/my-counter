@@ -5,6 +5,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -87,7 +88,34 @@ public class TestUI extends VerticalLayout implements CrudListener<User> { // or
     }
 
     private Component getDefaultCrud() {
-        return new GridCrud<>(User.class, this);
+
+        return new GridCrud<User>(User.class, this) {
+            protected void initLayout() {
+                findAllButton = new Button(VaadinIcon.REFRESH.create(), e -> findAllButtonClicked());
+                findAllButton.getElement().setAttribute("title", "Refresh list");
+
+                crudLayout.addToolbarComponent(findAllButton);
+
+                addButton = new Button(VaadinIcon.PLUS.create(), e -> addButtonClicked());
+                addButton.getElement().setAttribute("title", "Add");
+                crudLayout.addToolbarComponent(addButton);
+
+                updateButton = new Button(VaadinIcon.PENCIL.create(), e -> updateButtonClicked());
+                updateButton.getElement().setAttribute("title", "Upd");
+                crudLayout.addToolbarComponent(updateButton);
+
+                deleteButton = new Button(VaadinIcon.TRASH.create(), e -> deleteButtonClicked());
+                deleteButton.getElement().setAttribute("title", "Delete");
+                crudLayout.addToolbarComponent(deleteButton);
+
+                grid = new Grid<>(domainType);
+                grid.setSizeFull();
+                grid.addSelectionListener(e -> gridSelectionChanged());
+                crudLayout.setMainComponent(grid);
+
+                updateButtons();
+            }
+        };
     }
 
     private Component getMinimal() {

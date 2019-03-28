@@ -85,66 +85,6 @@
         </dependency>
 
         <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>${swagger-core-version}</version>
-        </dependency>
-
-        <!-- HTTP client: jersey-client -->
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>${jersey-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-common</artifactId>
-            <version>${jersey-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-multipart</artifactId>
-            <version>${jersey-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
-            <version>${jersey-version}</version>
-        </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.glassfish.jersey.ext</groupId>-->
-            <!--<artifactId>jersey-spring4</artifactId>-->
-            <!--<version>${jersey.version}</version>-->
-        <!--</dependency>-->
-
-        <!-- JSON processing: jackson -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>javax.activation-api</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
             <version>${jersey.version}</version>
@@ -187,48 +127,6 @@
     </build>
 
     <profiles>
-        <profile>
-            <id>swagger</id>
-            <activation>
-                <file>
-                    <missing>target/api/src/main/java/com/chainalysis/vaadin/swagger/ApiClient.java</missing>
-                </file>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>io.swagger</groupId>
-                        <artifactId>swagger-codegen-maven-plugin</artifactId>
-                        <version>2.2.3</version>
-                        <executions>
-                            <execution>
-                                <id>generate-swagger-spring</id>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                                <configuration>
-                                    <inputSpec>${project.basedir}/src/main/resources/user-management.json</inputSpec>
-                                    <language>java</language>
-                                    <library>jersey2</library>
-                                    <modelPackage>${project.groupId}.swagger.model</modelPackage>
-                                    <apiPackage>${project.groupId}.swagger.api</apiPackage>
-                                    <output>${project.basedir}/target/api</output>
-                                    <!--<invokerPackage>${project.groupId}.swagger.invoker</invokerPackage>-->
-                                    <configOptions>
-                                        <dateLibrary>java8</dateLibrary>
-                                    </configOptions>
-                                    <addCompileSourceRoot>false</addCompileSourceRoot>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                </plugins>
-            </build>
-        </profile>
         <profile>
             <!-- Production mode can be activated with either property or profile -->
             <id>production-mode</id>

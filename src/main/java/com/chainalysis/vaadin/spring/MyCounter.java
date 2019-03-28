@@ -10,7 +10,9 @@ public class MyCounter extends Component {
     private static PropertyDescriptor<Integer, Integer> VALUE =
             PropertyDescriptors.propertyWithDefault("value", 0);
 
+    // ---------------------------------------------------------------------------------------
     // binding attributes bidirectional
+    // ---------------------------------------------------------------------------------------
     @Synchronize(value = "count")
     public int getValue() {
         return get(VALUE);
@@ -20,8 +22,9 @@ public class MyCounter extends Component {
         set(VALUE, value);
     }
 
+    // ---------------------------------------------------------------------------------------
     // Events from client side to server side
-
+    // ---------------------------------------------------------------------------------------
     @DomEvent("count")
     public static class CountEvent extends ComponentEvent<MyCounter> {
         public CountEvent(MyCounter source, boolean fromClient) {
@@ -34,7 +37,9 @@ public class MyCounter extends Component {
         return addListener(CountEvent.class, listener);
     }
 
+    // ---------------------------------------------------------------------------------------
     // call methods client side
+    // ---------------------------------------------------------------------------------------
     public void increaseCounter() {
         getElement().callFunction("increaseCounter");
     }

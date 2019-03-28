@@ -1,6 +1,5 @@
 package com.chainalysis.vaadin.spring;
 
-import com.chainalysis.vaadin.spring.crud.TestUI;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
@@ -23,7 +22,7 @@ import com.vaadin.flow.theme.material.Material;
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 @Theme(Material.class)
-@PWA(name = "User Management", shortName = "Uman")
+@PWA(name = "Lightning Talk", shortName = "LTalk")
 public class MainAppLayout extends AppLayoutRouterLayout {
 
     public MainAppLayout() {
@@ -44,15 +43,17 @@ public class MainAppLayout extends AppLayoutRouterLayout {
 //                        "Version 2.0.6",
 //                        "/frontend/images/logo.png"
 //                ), HEADER)
-                .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), HomeLayout.class))
-                .add(new LeftNavigationComponent("Users", VaadinIcon.USER.create(), UsersLayout.class))
-                .add(new LeftNavigationComponent("Crud", VaadinIcon.USER.create(), TestUI.class))
-                .add(new LeftNavigationComponent("Organizations", VaadinIcon.GROUP.create(), OrgLayout.class))
+                .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(),
+                        HomeLayout.class))
+                .add(new LeftNavigationComponent("Client Invocation", VaadinIcon.AUTOMATION.create(),
+                        JavaScriptCallView.class))
+                .add(new LeftNavigationComponent("Server side logic", VaadinIcon.ABACUS.create(),
+                        ServerSideLogicView.class))
                 .build();
 
         init(AppLayoutBuilder
                 .get(Behaviour.LEFT_HYBRID)
-                .withTitle("User Management")
+                .withTitle("Lightning Talk")
                 .withAppBar(appBar)
                 .withAppMenu(appMenu)
                 .withTheme(Material.class)
