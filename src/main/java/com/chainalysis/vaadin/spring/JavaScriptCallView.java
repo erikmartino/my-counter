@@ -12,7 +12,8 @@ public class JavaScriptCallView extends VerticalLayout {
     Label label;
 
     public JavaScriptCallView() {
-        add(new Label("Invokes the methods decrease/increaseCounter() methods on the client side"));
+        add(new Label("Invokes the methods decrease/increaseCounter() in the " +
+                "web component on the client side"));
         counter = new MyCounter();
         add(counter);
 
