@@ -9,7 +9,6 @@ import com.vaadin.flow.router.Route;
 import org.springframework.stereotype.Component;
 
 @Route(value = "serverside", layout = MainAppLayout.class)
-@Component
 public class ServerSideLogicView extends VerticalLayout {
     MyCounter counter;
     Label label;
@@ -37,7 +36,6 @@ public class ServerSideLogicView extends VerticalLayout {
         add(label);
 
         counter.addCountListener(e -> counterUpdated());
-        counterUpdated();
     }
 
     void counterUpdated() {
