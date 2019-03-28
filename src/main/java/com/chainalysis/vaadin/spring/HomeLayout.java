@@ -18,11 +18,7 @@ public class HomeLayout extends VerticalLayout {
 
         Div div = new Div();
         add(div);
-        String value = "display: flex;" +
-                "width: 100%;" +
-                "height: 100%;" +
-                "justify-content: center;" +
-                "align-items: center;";
+        String value = "display: flex;width: 100%;height: 100%;justify-content: center;align-items: center;";
         div.getElement().setAttribute("style", value);
         myCounter = new MyCounter();
         div.add(myCounter);

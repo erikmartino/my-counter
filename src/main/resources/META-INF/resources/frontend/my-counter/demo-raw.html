@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%">
 <head>
   <title>Web Components - My Counter</title>
-  <script type="module">
-      import './my-counter.js';</script>
+  <script type="module">import './my-counter.js';</script>
 </head>
 <!-- http://localhost:8080/frontend/my-counter/demo-raw.html -->
-<body>
-<my-counter value="42"></my-counter>
+<body style="height: 100%">
+<div style="display:flex;width:100%;height:100%;justify-content:center;align-items:center;">
+  <my-counter value="42"></my-counter>
+</div>
 </body>
 
 </html>

@@ -45,7 +45,6 @@ export class MyCounter extends HTMLElement {
     }
 
     get value() {
-        console.log("get value: " + this._value);
         return this._value;
     }
 
