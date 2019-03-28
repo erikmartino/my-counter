@@ -22,7 +22,7 @@ import com.vaadin.flow.theme.material.Material;
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 @Theme(Material.class)
-@PWA(name = "Lightning Talk", shortName = "LTalk")
+@PWA(name = "Lightning Talk", shortName = "LightTalk", description = "Demo for lightning talk")
 public class MainAppLayout extends AppLayoutRouterLayout {
 
     public MainAppLayout() {

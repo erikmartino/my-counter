@@ -22,16 +22,6 @@ public class MyCounter extends Component {
         set(VALUE, value);
     }
 
-    // ---------------------------------------------------------------------------------------
-    // Events from client side to server side
-    // ---------------------------------------------------------------------------------------
-    @DomEvent("count")
-    public static class CountEvent extends ComponentEvent<MyCounter> {
-        public CountEvent(MyCounter source, boolean fromClient) {
-            super(source, fromClient);
-        }
-    }
-
     public Registration addCountListener(
             ComponentEventListener<CountEvent> listener) {
         return addListener(CountEvent.class, listener);
@@ -46,5 +36,15 @@ public class MyCounter extends Component {
 
     public void decreaseCounter() {
         getElement().callFunction("decreaseCounter");
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Events from client side to server side
+    // ---------------------------------------------------------------------------------------
+    @DomEvent("count")
+    public static class CountEvent extends ComponentEvent<MyCounter> {
+        public CountEvent(MyCounter source, boolean fromClient) {
+            super(source, fromClient);
+        }
     }
 }
